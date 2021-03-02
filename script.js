@@ -1,8 +1,8 @@
 "use strict";
 
 document.addEventListener("DOMContentLoaded", function () {
-  const form = document.getElementById("form");
-  form.addEventListener("submit", formSend);
+  const form = document.getElementById('form');
+  form.addEventListener('submit', formSend);
 
   async function formSend(e) {
     e.preventDefault();
@@ -15,8 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
     for (let index = 0; index < formReq.length; index++) {
       const input = formReq[index];
       formRemoveError(input);
-      if (input.classList.contains("_email")) {
-        if (emailTest(input)) {
+      if (input.classList.contains('_email')) {
+        if (validateEmail(input)) {
           formAddError(input);
           error++;
         }
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formAddError(input);
         error++;
       } else {
-        if (input.value === "") {
+        if (input.value === '') {
           formAddError(input);
           error++;
         }
@@ -35,15 +35,18 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   function formAddError(input) {
-    input.parentElement.classList.add('_error');
+  
     input.classList.add("_error");
   }
   function formRemoveError(input) {
     input.parentElement.classList.remove("_error");
     input.classList.remove("_error");
   }
-  function emailTest(input) {
-    return /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  function validateEmail(input) {
+
+    return !/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/.test(input.value);
+
+    
   }
 
 });
